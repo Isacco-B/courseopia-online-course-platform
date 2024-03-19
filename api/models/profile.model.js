@@ -9,14 +9,6 @@ const profileSchema = new mongoose.Schema(
       unique: true,
     },
     // Personal Info
-    firstName: {
-      type: String,
-      required: [true, "Your name is required"],
-    },
-    lastName: {
-      type: String,
-      required: [true, "Your last name is required"],
-    },
     profilePicture: {
       type: String,
       default:
@@ -107,6 +99,15 @@ const profileSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+profileSchema.pre("remove", async function (next) {
+  try {
+    await User.deleteOne({ _id: this.user });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 const Profile = mongoose.model("Profile", profileSchema);
 export default Profile;
