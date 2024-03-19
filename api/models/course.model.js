@@ -17,10 +17,6 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Course duration is required"],
   },
-  price: {
-    type: Number,
-    required: [true, "Course price is required"],
-  },
   image: {
     type: String,
     default:
@@ -33,6 +29,13 @@ const courseSchema = new mongoose.Schema({
       required: [true, "Course teacher is required"],
     },
   ],
+  lessons: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Lesson",
+      required: [true, "Course lesson is required"],
+    }
+  ]
 })
 
 const Course = mongoose.model("Course", courseSchema);
