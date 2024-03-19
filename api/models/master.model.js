@@ -16,7 +16,7 @@ const masterSchema = new mongoose.Schema({
       required: [true, "Master course is required"],
     },
   ],
-  durarion: {
+  duration: {
     type: Number,
     required: [true, "Master duration is required"],
   },
