@@ -14,19 +14,27 @@ export const userApiSlice = apiSlice.injectEndpoints({
           return response.status === 200 && !result.isError;
         },
       }),
-      transformResponse: (responseData) => {
-        const loadedUsers = responseData.map((user) => {
-          user.id = user._id;
-          return user;
-        });
-        return usersAdapter.setAll(initalState, loadedUsers);
-      },
       providesTags: (result, error, arg) => {
-        if (result?.ids) {
+        if (result) {
           return [
             { type: "User", id: "LIST" },
-            ...result.ids.map((id) => ({ type: "User", id })),
+            ...result.map(({ slug }) => ({ type: "User", id: slug })),
           ];
+        } else {
+          return [{ type: "User", id: "LIST" }];
+        }
+      },
+    }),
+    getUser: builder.query({
+      query: (slug) => ({
+        url: `/users/${slug}`,
+        validateStatus: (response, result) => {
+          return response.status === 200 && !result.isError;
+        },
+      }),
+      providesTags: (result, error, arg) => {
+        if (result?.slug) {
+          return [{ type: "User", id: result?.slug }];
         } else return [{ type: "User", id: "LIST" }];
       },
     }),
@@ -41,33 +49,95 @@ export const userApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: [{ type: "User", id: "LIST" }],
     }),
     updateUser: builder.mutation({
-      query: (initialUserData) => ({
-        url: "/users",
-        method: "PATCH",
+      query: ({ userId, ...userFormData }) => ({
+        url: `/users/${userId}`,
+        method: "PUT",
         body: {
-          ...initialUserData,
+          ...userFormData,
         },
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
+      invalidatesTags: (result, error, arg) => {
+        if (result?.updatedUser) {
+          return [{ type: "User", id: result.updatedUser.slug }];
+        } else return [{ type: "User", id: "LIST" }];
+      },
     }),
     deleteUser: builder.mutation({
-      query: ({ id }) => ({
-        url: `/users`,
+      query: ({ userId }) => ({
+        url: `/users${userId}`,
         method: "DELETE",
+      }),
+      invalidatesTags: (result, error, arg) => {
+        if (result?.deletedUser) {
+          return [{ type: "User", id: result.deletedUser.slug }];
+        } else return [{ type: "User", id: "LIST" }];
+      },
+    }),
+    changeCompletedLessons: builder.mutation({
+      query: ({ userId, lessonId }) => ({
+        url: `/users/${userId}/lessons/${lessonId}`,
+        method: "PUT",
+      }),
+      invalidatesTags: (result, error, arg) => {
+        if (result?.updatedUser) {
+          return [{ type: "User", id: result.updatedUser.slug }];
+        } else return [{ type: "User", id: "LIST" }];
+      },
+    }),
+    setCurrentMaster: builder.mutation({
+      query: ({ userId, masterId }) => ({
+        url: `/users/${userId}/master/${masterId}`,
+        method: "PUT",
+      }),
+      invalidatesTags: (result, error, arg) => {
+        if (result?.updatedUser) {
+          return [{ type: "User", id: result.updatedUser.slug }];
+        } else return [{ type: "User", id: "LIST" }];
+      },
+    }),
+    changeRole: builder.mutation({
+      query: ({ userId, role, user }) => ({
+        url: `/users/${userId}/role`,
+        method: "PUT",
         body: {
-          id,
+          role,
+          user,
         },
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
+      invalidatesTags: (result, error, arg) => {
+        if (result?.updatedUser) {
+          return [{ type: "User", id: result.updatedUser.slug }];
+        } else return [{ type: "User", id: "LIST" }];
+      },
     }),
+    changeStatus: builder.mutation({
+      query: ({ userId, active, user }) => ({
+        url: `/users/${userId}/status`,
+        method: "PUT",
+        body: {
+          active,
+          user,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => {
+        if (result?.updatedUser) {
+          return [{ type: "User", id: result.updatedUser.slug }];
+        } else return [{ type: "User", id: "LIST" }];
+      },
+    })
   }),
 });
 
 export const {
   useGetUsersQuery,
+  useGetUserQuery,
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useChangeCompletedLessonsMutation,
+  useSetCurrentMasterMutation,
+  useChangeRoleMutation,
+  useChangeStatusMutation,
 } = userApiSlice;
 
 export const selectUsersResult = userApiSlice.endpoints.getUsers.select();
