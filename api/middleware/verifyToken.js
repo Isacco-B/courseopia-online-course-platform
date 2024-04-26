@@ -3,7 +3,6 @@ import { errorHandler } from "./errorHandler.js";
 
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization || req.headers.Authorization;
-  console.log(authHeader);
 
   if (!authHeader?.startsWith("Bearer ")) {
     return next(errorHandler(401, "Unathorized"));
@@ -19,8 +18,7 @@ export const verifyToken = (req, res, next) => {
     if (err) {
       return next(errorHandler(403, "Forbidden"));
     }
-    req.user = decoded.UserInfo.email;
-    req.role = decoded.UserInfo.role;
+    req.user = decoded.UserInfo;
     next();
   });
 };
