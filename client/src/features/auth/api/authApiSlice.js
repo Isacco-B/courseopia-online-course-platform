@@ -51,6 +51,43 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/reset-password",
+        method: "POST",
+        body: { ...data },
+      }),
+    }),
+    confirmPasswordReset: builder.mutation({
+      query: (data) => ({
+        url: "/auth/confirm-password-reset",
+        method: "POST",
+        body: { ...data },
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: ({ userId, data }) => ({
+        url: `/auth/change-password/${userId}`,
+        method: "POST",
+        body: { ...data },
+      }),
+    }),
+    getAccountVerification: builder.query({
+      query: (userId) => ({
+        url: `/auth/verify-account/${userId}`,
+        method: "GET",
+      }),
+    }),
+    confirmAccountVerification: builder.mutation({
+      query: ({ userId, data }) => ({
+        url: `/auth/verify-account/${userId}`,
+        method: "POST",
+        body: { ...data },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: "User", id: arg.userId },
+      ],
+    }),
   }),
 });
 
@@ -59,4 +96,9 @@ export const {
   useRegisterMutation,
   useSendLogoutMutation,
   useRefreshMutation,
+  useResetPasswordMutation,
+  useConfirmPasswordResetMutation,
+  useChangePasswordMutation,
+  useGetAccountVerificationQuery,
+  useConfirmAccountVerificationMutation,
 } = authApiSlice;
