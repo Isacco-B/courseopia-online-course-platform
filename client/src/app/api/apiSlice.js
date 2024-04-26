@@ -17,7 +17,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error?.status === 403) {
-    console.log("sending refresh token");
 
     // send refresh token to get new access token
     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
@@ -37,8 +36,26 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   return result;
 };
 
+export function providesList(resultsWithIds, tagType) {
+  return resultsWithIds
+    ? [
+        { type: tagType, id: "LIST" },
+        ...resultsWithIds.map(({ id }) => ({ type: tagType, id })),
+      ]
+    : [{ type: tagType, id: "LIST" }];
+}
+
 export const apiSlice = createApi({
+  reducerPath: "api",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["User"],
-  endpoints: (builder) => ({}),
+  tagTypes: [
+    "User",
+    "Profile",
+    "Course",
+    "Master",
+    "Lesson",
+    "Category",
+    "Project",
+  ],
+  endpoints: () => ({}),
 });
