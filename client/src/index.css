@@ -61,7 +61,6 @@
   }
 }
 
-
 /* Phone Input */
 
 #telefono.PhoneInputInput:focus {
@@ -118,11 +117,8 @@ input::file-selector-button {
 
 /* Quill */
 
-
-
 #content button svg {
   filter: invert(100%);
-
 }
 
 .ql-formats .ql-active {
@@ -137,32 +133,65 @@ input::file-selector-button {
   color: white;
 }
 
-.post-content p {
+.quill-content p {
   margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-family: sans-serif;
 }
 
-.post-content h1 {
+.quill-content h1 {
   font-size: 1.5rem;
   font-weight: 600;
   font-family: sans-serif;
-  margin: 1.5rem 0;
 }
 
-.post-content h2 {
+.quill-content h2 {
   font-size: 1.4rem;
   font-family: sans-serif;
-  margin: 1.5rem 0;
 }
 
-.post-content a {
+.quill-content h3 {
+  font-size: 1.3rem;
+  font-family: sans-serif;
+}
+
+.quill-content a {
   color: rgba(22, 163, 74, 0.8);
+  font-size: 1.05rem;
   text-decoration: none;
 }
 
-.post-content a:hover {
+.quill-content a:hover {
   text-decoration: underline;
 }
 
-.post-content a {
+.quill-content a {
   color: rgba(22, 163, 74, 0.8);
 }
+
+.quill>* {
+  border-color: inherit !important;
+  color: inherit !important;
+}
+
+.quill>.ql-toolbar {
+  border-radius: 10px 10px 0 0;
+}
+
+.quill>.ql-container {
+  font-size: inherit;
+  border-radius: 0 0 10px 10px;
+  width: 100%;
+}
+
+.quill>.ql-container>.ql-editor.ql-blank::before {
+  color: inherit;
+}
+
+@media (min-width: 500px) {
+  .ql-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
