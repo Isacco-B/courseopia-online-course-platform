@@ -2,6 +2,7 @@
 import ModeToggle from "@/components/ThemeToggle";
 import Courseopia from "../../../assets/img/courseopia.png";
 import Wave from "../../../assets/img/wave.svg";
+import { Toaster } from "@/components/ui/toaster";
 
 
 export default function AuthLayout({ children, title }) {
@@ -10,7 +11,7 @@ export default function AuthLayout({ children, title }) {
       <div className="container p-4 text-right">
         <ModeToggle />
       </div>
-      <div
+      <main
         style={{ "--image-url": `url(${Wave})` }}
         className="px-4 py-14 md:py-24 min-h-screen bg-[image:var(--image-url)] bg-no-repeat bg-bottom"
       >
@@ -25,7 +26,8 @@ export default function AuthLayout({ children, title }) {
           </h1>
           {children}
         </div>
-      </div>
+      </main>
+      <Toaster />
     </>
   );
 }
