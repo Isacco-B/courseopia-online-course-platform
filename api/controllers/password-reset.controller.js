@@ -62,20 +62,20 @@ export const checkPasswordResetToken = async (req, res, next) => {
     const passwordReset = await PasswordReset.findOne({ token });
     if (!passwordReset) {
       return res.redirect(
-        `http://${CLIENT_URL}/password-dimenticata?error=invalid_token`
+        `${CLIENT_URL}/password-dimenticata?error=invalid_token`
       );
     }
     jwt.verify(token, process.env.PASSWORD_TOKEN_SECRET, (err, decoded) => {
       if (err) {
         return res.redirect(
-          `http://${CLIENT_URL}/password-dimenticata?error=invalid_token`
+          `${CLIENT_URL}/password-dimenticata?error=invalid_token`
         );
       }
-      res.redirect(`http://${CLIENT_URL}/password-reset/${token}`);
+      res.redirect(`${CLIENT_URL}/password-reset/${token}`);
     });
   } catch (error) {
     res.redirect(
-      `http://${CLIENT_URL}/password-dimenticata?error=generic_error`
+      `${CLIENT_URL}/password-dimenticata?error=generic_error`
     );
     next(error);
   }
