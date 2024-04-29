@@ -49,36 +49,36 @@ Link: https://demo8.isaccobertoli.com
 - Course | Lessons
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="40%" src="./images/corsi.png">
-    <img width="40%" src="./images/lezioni.png">
+    <img src="./images/corsi.png">
+    <img src="./images/lezioni.png">
 </div>
 
 - Leaderboard | Users
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="50%" src="./images/classifica.png">
-    <img width="50%" src="./images/utenti.png">
+    <img src="./images/classifica.png">
+    <img src="./images/utenti.png">
 </div>
 
 - Course Detail | Project
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="50%" src="./images/courseDetail.png">
-    <img width="50%" src="./images/sendProject.png">
+    <img src="./images/courseDetail.png">
+    <img src="./images/sendProject.png">
 </div>
 
 - Projects | Create form
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="50%" src="./images/progetti.png">
-    <img width="50%" src="./images/form.png">
+    <img src="./images/progetti.png">
+    <img src="./images/form.png">
 </div>
 
 - Dark mode | Responsive Design
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="80%" src="./images/darkMode.png">
-    <img width="20%" src="./images/mobile.png">
+    <img src="./images/darkMode.png">
+    <img src="./images/mobile.png">
 </div>
 
 ## Getting Up and Running Locally
