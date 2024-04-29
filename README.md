@@ -49,8 +49,8 @@ Link: https://demo8.isaccobertoli.com
 - Course | Lessons
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="50%" src="./images/corsi.png">
-    <img width="50%" src="./images/lezioni.png">
+    <img width="30%" src="./images/corsi.png">
+    <img width="30%" src="./images/lezioni.png">
 </div>
 
 - Leaderboard | Users
