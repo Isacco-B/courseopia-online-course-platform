@@ -42,8 +42,8 @@ Link: https://demo8.isaccobertoli.com
 - Home | Master
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; gap: 10px; margin-bottom: 10px">
-    <img width="50%" src="./images/home.png">
-    <img width="50%" src="./images//master.png">
+    <img src="./images/home.png">
+    <img src="./images//master.png">
 </div>
 
 - Course | Lessons
