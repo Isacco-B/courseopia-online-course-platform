@@ -70,7 +70,13 @@ function startServer() {
       .json({ success: false, statusCode, message, isError: true });
   });
 
-  app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}/`));
+  app.listen(PORT, () =>
+    console.log(
+      "Listening on" + process.env.NODE_ENV === "production"
+        ? `https://demo7.isaccobertoli.com`
+        : `http://localhost:${PORT}`
+    )
+  );
 }
 
 // Connect to MongoDB
