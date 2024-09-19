@@ -1,6 +1,6 @@
-# Start2Impact FullStack Project
+# Courseopia online course platform
 
-- Online course site.
+- Courseopia is an online platform where users can create and manage courses and masterclasses. Participants can enroll in courses, follow lessons, complete various sections, and submit a final project for evaluation by the course instructor. After the review, users receive feedback via email.
 - License: MIT
 
 ## Features
