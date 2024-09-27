@@ -9,12 +9,12 @@ import { validationResult } from "express-validator";
 const SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://demo7.isaccobertoli.com";
+    : process.env.SERVER_URL;
 
 const CLIENT_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:5173"
-    : "https://demo7.isaccobertoli.com";
+    : process.env.CLIENT_URL;
 
 export const createPasswordReset = async (req, res, next) => {
   const { email } = req.body;
