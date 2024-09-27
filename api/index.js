@@ -2,10 +2,10 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import corsOptions from "./config/corsOptions.js";
 import mongoose from "mongoose";
-import { logEvents, logger } from "./middleware/logger.js";
 import path from "path";
+import { logEvents, logger } from "./middleware/logger.js";
+import { corsOptions } from "./config/corsOptions.js";
 import { fileURLToPath } from "url";
 
 dotenv.config();
@@ -70,13 +70,14 @@ function startServer() {
       .json({ success: false, statusCode, message, isError: true });
   });
 
-  app.listen(PORT, () =>
-    console.log(
-      "Listening on" + process.env.NODE_ENV === "production"
-        ? `https://demo7.isaccobertoli.com`
-        : `http://localhost:${PORT}`
-    )
-  );
+  app.listen(PORT, () => {
+    const baseURL =
+      process.env.NODE_ENV === "production"
+        ? `${process.env.SERVER_URL}`
+        : `http://localhost:${PORT}`;
+
+    console.log(`Listening on ${baseURL}`);
+  });
 }
 
 // Connect to MongoDB
