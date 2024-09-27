@@ -5,7 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import path from "path";
-import { logEvents, logger } from "./middleware/logger.js";
+//import { logEvents, logger } from "./middleware/logger.js";
 import { corsOptions } from "./config/corsOptions.js";
 import { fileURLToPath } from "url";
 
@@ -48,7 +48,7 @@ function startServer() {
   const app = express();
 
   // Middleware
-  app.use(logger);
+  //app.use(logger);
   app.use(cors(corsOptions));
   app.use(express.json());
   app.use(cookieParser());
@@ -78,10 +78,10 @@ function startServer() {
 
   // Error Handling
   app.use((err, req, res, next) => {
-    logEvents(
-      `${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
-      "errLog.log"
-    );
+    // logEvents(
+    //   `${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
+    //   "errLog.log"
+    // );
     const statusCode = err.statusCode || 500;
     const message = err.message || "Internal Server Error";
     res
@@ -110,8 +110,8 @@ mongoose
   .catch((err) => {
     console.log("Could not connect to MongoDB");
     console.log(err);
-    logEvents(
-      `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
-      "mongoErrLog.log"
-    );
+    // logEvents(
+    //   `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+    //   "mongoErrLog.log"
+    // );
   });
