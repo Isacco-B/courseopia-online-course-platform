@@ -1,6 +1,10 @@
-import allowedOrigins from "./allowedOrigins.js";
+import dotenv from "dotenv";
+dotenv.config();
 
-const corsOptions = {
+const allowedOrigins = process.env.ALLOWD_HOSTS.split(",");
+console.log(allowedOrigins);
+
+export const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
@@ -10,5 +14,3 @@ const corsOptions = {
   },
   credentials: true,
 };
-
-export default corsOptions;
