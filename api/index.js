@@ -1,5 +1,6 @@
-import dotenv from "dotenv";
 import express from "express";
+import fs from "fs";
+import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
@@ -12,6 +13,24 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const uploadsDir = path.join(__dirname, "uploads");
+const avatarsDir = path.join(__dirname, "assets", "avatars");
+const coursesDir = path.join(__dirname, "assets", "courses");
+const projectsDir = path.join(__dirname, "assets", "projects");
+
+const directories = [uploadsDir, avatarsDir, coursesDir, projectsDir];
+
+function createDirectoryIfNotExists(directory) {
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory, { recursive: true });
+    console.log(`Created directory: ${directory}`);
+  } else {
+    console.log(`Directory already exists: ${directory}`);
+  }
+}
+
+directories.forEach(createDirectoryIfNotExists);
 
 const PORT = process.env.PORT || 3000;
 
