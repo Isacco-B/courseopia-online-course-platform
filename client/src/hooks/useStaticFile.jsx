@@ -1,7 +1,8 @@
-// eslint-disable-next-line no-unused-vars
 import NoImage from "../assets/img/no-image.jpg";
+import { BASEURL } from "@/app/api/apiSlice";
+
+
 export  function useStaticFile(path) {
-  const BASE_URL = "http://localhost:3000/";
-  const url = path ? BASE_URL + path : NoImage;
+  const url = path ? BASEURL + "/" +  path : NoImage;
   return url;
 }
