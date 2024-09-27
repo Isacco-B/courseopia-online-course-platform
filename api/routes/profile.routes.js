@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const MAX_SIZE = 2 * 1024 * 1024;
+const MAX_SIZE = 10 * 1024 * 1024;
 
 //image filter
 const upload = multer({
