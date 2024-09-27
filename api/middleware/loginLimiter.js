@@ -3,7 +3,7 @@ import { logEvents } from "./logger.js";
 
 export const loginLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 5, // limit each IP to 5 login requests per windowMs
+  max: 5,
   message: {
     message: "Too many login attempts, please try again after 60 seconds",
   },
@@ -14,6 +14,6 @@ export const loginLimiter = rateLimit({
     );
     res.status(options.statusCode).send(options.message);
   },
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  standardHeaders: true,
+  legacyHeaders: false,
 })
